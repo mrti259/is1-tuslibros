@@ -1,0 +1,17 @@
+name: backend
+version: 0.1.0
+
+authors:
+  - Borja Garibotti <mgaribotti@fi.uba.ar>
+
+targets:
+  backend:
+    main: src/server.cr
+
+crystal: '>= 1.11.2'
+
+license: MIT
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
