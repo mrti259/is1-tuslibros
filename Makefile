@@ -10,7 +10,11 @@ logs:
 build:
 	docker compose build
 
-test:
-	crystal spec backend
+install:
+	cd backend && shards install
 
+spec:
+	cd backend && crystal spec
 
+play: install
+	cd backend && crystal play

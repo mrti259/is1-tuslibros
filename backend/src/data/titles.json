@@ -1,0 +1,26 @@
+[
+  {
+    "isbn": "9780137314942",
+    "title": "Modern Software Engineering"
+  },
+  {
+    "isbn": "9780321278654",
+    "title": "Extreme Programming Explained"
+  },
+  {
+    "isbn": "9780201710915",
+    "title": "Planning Extreme Programming"
+  },
+  {
+    "isbn": "9780321125217",
+    "title": "Domain-Driven Design"
+  },
+  {
+    "isbn": "9780735619654",
+    "title": "Object Thinking"
+  },
+  {
+    "isbn": "9780321146533",
+    "title": "Test Driven Development: By Example"
+  }
+]
