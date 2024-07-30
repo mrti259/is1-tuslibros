@@ -6,15 +6,17 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
-import {Rating, Box} from "@mui/material";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {IconButton, Rating} from "@mui/material";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Stack from "@mui/material/Stack";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 
 export default class BookRack extends Component {
 
     static propTypes = {
-        app: PropTypes.object.isRequired
+        app: PropTypes.object.isRequired,
+        onAddToCartDo: PropTypes.func.isRequired,
     };
 
     constructor(props) {
@@ -50,7 +52,7 @@ export default class BookRack extends Component {
 
     renderBookDetailOf(aBook) {
         return <CardContent sx={{flexGrow: 1}}>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h5">
                 {aBook.title}
             </Typography>
             <Typography>
@@ -62,24 +64,27 @@ export default class BookRack extends Component {
 
     renderBookActionsOn(aBook) {
         return <CardActions>
-            <Box sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '100%',
-                p: 1,
-                m: 1,
-            }}>
-                <Button
-                    style={{border: 0}}
-                    onClick={() => {
-
-                    }}
-                    title="Agregar al carrito"
-                >
-                    <ShoppingCartIcon />
-                </Button>
-            </Box>
+            <Stack direction="row" justifyContent="space-around" alignItems="center" sx={{width: '100%'}}>
+                {this.renderAddToCartBar(aBook)}
+                {this.renderPriceOf(aBook)}
+            </Stack>
         </CardActions>;
+    }
+
+    renderPriceOf(aBook) {
+        return <Stack direction="row" justifyContent="flex-end" alignItems="center">
+            <AttachMoneyIcon fontSize="small"/>
+            <Typography variant="h6">{aBook.price}</Typography>
+        </Stack>;
+    }
+
+    renderAddToCartBar(aBook) {
+        return <IconButton
+            color="primary" title="Agregar al carrito"
+            onClick={() => {
+                this.props.onAddToCartDo(aBook)
+            }}>
+            <AddShoppingCartIcon/>
+        </IconButton>;
     }
 }

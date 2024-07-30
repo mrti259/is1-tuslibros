@@ -3,41 +3,15 @@ import Typography from "@mui/material/Typography";
 import {Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText} from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import PropTypes from "prop-types";
 
 
-export default class ShoppingCart extends Component {
+export default class Cart extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: [
-                {
-                    article: {
-                        title: "Smalltalk-80: The Language and its Implementation",
-                        authors: ['Adele Goldberg', 'David Robson'],
-                        cover: 'https://source.unsplash.com/random?wallpapers',
-                    },
-                    quantity: 1
-                },
-                {
-                    article: {
-                        title: "Smalltalk Best Practice Patterns",
-                        authors: ['Kent Beck'],
-                        cover: 'https://source.unsplash.com/random?wallpapers',
-                    },
-                    quantity: 1
-                },
-                {
-                    article: {
-                        title: "Modern Software Engineering: Doing What Works to Build Better Software Faster",
-                        authors: ['David Farley'],
-                        cover: 'https://source.unsplash.com/random?wallpapers',
-                    },
-                    quantity: 1
-                },
-            ]
-        }
-    }
+    static propTypes = {
+        cart: PropTypes.object.isRequired
+    };
+
 
     render() {
         return <Box
@@ -61,14 +35,23 @@ export default class ShoppingCart extends Component {
             color="text.secondary"
             gutterBottom
         >
-            ¡Ya casi son tuyos!
+            {this.title()}
         </Typography>;
+    }
+
+    title() {
+        if (this.hasItems()) {
+            return "¡Ya casi son tuyos!";
+        }
+        else {
+            return "¡Comienza a armar tu pedido!"
+        }
     }
 
     renderItems() {
         return <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-            {this.state.items.map((cartItem) => this.renderItem(cartItem))}
-        </List>;
+                {this.props.cart.items.map((cartItem) => this.renderItem(cartItem))}
+            </List>;
     }
 
     renderItem(cartItem) {
@@ -87,7 +70,7 @@ export default class ShoppingCart extends Component {
                                 variant="body2"
                                 color="text.secondary"
                             >
-                                por {cartItem.article.authors.join(', ')}
+                                {cartItem.quantity}
                             </Typography>
                         </>
                     }
@@ -95,5 +78,9 @@ export default class ShoppingCart extends Component {
             </ListItem>
             <Divider variant="inset" component="li"/>
         </>;
+    }
+
+    hasItems() {
+        return this.props.cart.items.length > 0;
     }
 }
